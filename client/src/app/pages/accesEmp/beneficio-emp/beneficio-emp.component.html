@@ -1,0 +1,81 @@
+<h1>Beneficios</h1>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    
+    <ng-container matColumnDef="Nro_Empleado" class = "align">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo del Empleado </th>
+      <td mat-cell *matCellDef="let element"> {{element.Nro_Empleado}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="nombre" class = "align">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Nombre de Empleado </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.nombre}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Anhos_Antiguedad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Años de Antiguedad </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Anhos_Antiguedad}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="porcentaje_Antiguedad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Porcentaje de Antiguedad </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.porcentaje_Antiguedad}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="Beneficio_Antiguedad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Beneficio de Antiguedad </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Beneficio_Antiguedad}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Horas_Extras" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Cantidad de Horas Extras </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Horas_Extras}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Pago_Horas_Extras">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Pago de Horas Extras </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Pago_Horas_Extras}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="mes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Mes </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.mes}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Dias_que_Falto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias que Falto </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Dias_que_Falto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Dias_Totales">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias Totales </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Dias_Totales}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Años_De_Antiguedad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Años De Antiguedad </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Anhos_De_Antiguedad}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Mes_de_informacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Mes de informacion </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Mes_de_informacion}} </td>
+    </ng-container>
+  <!--
+    <ng-container matColumnDef="Rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{element.Rol}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Departamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.Departamento}} </td>
+    </ng-container>
+
+
+    -->
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

@@ -1,0 +1,63 @@
+<!--{{data.Emp | json}}-->
+<h2 mat-dialog-title>{{ data?.title }}</h2>
+<mat-dialog-content>
+  <div class="modal-form">
+    <form [formGroup] = "ActiForm" >
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Cod_Emp"
+            matInput placeholder="Codigo de Empleado" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Horas_Extras"
+            matInput placeholder="Horas Extras" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_P"
+            matInput placeholder="Dias Puntual" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_A"
+            matInput placeholder="Dias con atraso" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_F"
+            matInput placeholder="Dias faltados" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_Totales"
+            matInput placeholder="Total de Dias" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Mes_vigente"
+            matInput placeholder="Mes vigente" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Anhos_Antiguedad"
+            matInput placeholder="Años de Antiguedad" required>
+        </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content> 
+<!--{{AdmiForm.status}}-->
+<mat-dialog-actions align  ="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="true"
+    color="primary"
+    (click)="onSave()"
+    ckdFocusInitial
+    
+  >
+  <!--[disabled]="!userForm.baseForm.valid"-->
+    Save
+  </button>
+</mat-dialog-actions>

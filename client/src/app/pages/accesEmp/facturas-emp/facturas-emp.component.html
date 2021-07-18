@@ -1,0 +1,74 @@
+<div class="table-button-row">
+    <button
+    (click)="onOpenModal()"
+      mat-flat-button
+      color="primary"
+      class="btn-new">
+      Agregar Factura
+    </button>
+    <button
+  (click)="generatePDF()"
+    mat-flat-button
+    color="primary"
+    class="btn-new">
+    Generar PDF
+  </button>
+</div>
+<div id="Table1" #Table1>
+  <h1>Facturas</h1>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    
+    <ng-container matColumnDef="nro_Empleado" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class = "align"> Codigo del Empleado </th>
+      <td mat-cell *matCellDef="let element" class = "align"> {{element.nro_Empleado}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del empleado </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="Codigo_Factura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de Factura </th>
+      <td mat-cell *matCellDef="let element"> {{element.Codigo_Factura}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="empresa_factura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa de factura </th>
+      <td mat-cell *matCellDef="let element"> {{element.empresa_factura}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad de la factura</th>
+      <td mat-cell *matCellDef="let element"> {{element.Cantidad}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Mes_Descargo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Mes de Descargo </th>
+      <td mat-cell *matCellDef="let element"> {{element.Mes_Descargo}} </td>
+    </ng-container>
+  
+
+  <!--
+    <ng-container matColumnDef="Rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{element.Rol}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Departamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.Departamento}} </td>
+    </ng-container>
+
+
+    -->
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+</div>

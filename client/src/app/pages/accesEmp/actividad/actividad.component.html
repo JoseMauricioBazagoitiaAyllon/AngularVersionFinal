@@ -1,0 +1,89 @@
+<div class="up">
+    <button
+    (click)="onOpenModal()"
+      mat-flat-button
+      color="primary"
+      class="btn-new">
+      Agregar actividades
+    </button>
+</div>
+
+
+<h1>Actividad Empleado</h1>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    
+    <ng-container matColumnDef="cod_Registros_Emp" class = "align">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo de registro Empleado </th>
+      <td mat-cell *matCellDef="let element"> {{element.cod_Registros_Emp}} </td>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="Nombre" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Nombre del empleado </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Nombre}} </td>
+    </ng-container>
+  
+    
+  
+    <ng-container matColumnDef="Horas_Extras" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo de Horas Extras </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Horas_Extras}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Dias_Puntual" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias Puntual </th>
+      <td mat-cell *matCellDef="let element"> {{element.Dias_Puntual}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Dias_Atrasado" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias Atrasado </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Dias_Atrasado}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Dias_que_Falto" class="aling">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias que Falto </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Dias_que_Falto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Dias_Totales" class="aling">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Dias Totales </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Dias_Totales}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Años_De_Antiguedad" class="aling">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Años De Antiguedad </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Anhos_De_Antiguedad}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Mes_de_informacion" class="aling">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Mes de informacion </th>
+        <td mat-cell *matCellDef="let element" class="aling"> {{element.Mes_de_informacion}} </td>
+    </ng-container>
+  <!--
+    <ng-container matColumnDef="Rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+        <td mat-cell *matCellDef="let element"> {{element.Rol}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Departamento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+        <td mat-cell *matCellDef="let element"> {{element.Departamento}} </td>
+    </ng-container>
+
+
+    -->
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Acciones </th>
+      <td mat-cell *matCellDef="let element" >
+        <div class="table-button-row">
+          <button mat-flat-button color = "accent" (click)="onOpenModal(element)" class="btn-new" class="aling">Editar</button>
+          <button mat-flat-button color = "warn" (click)="onDelete(element.cod_Registros_Emp)" class="aling">Eliminar</button>
+        </div>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+<p>Actividad</p>

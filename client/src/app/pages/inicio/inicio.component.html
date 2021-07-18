@@ -1,0 +1,139 @@
+<div class="conteiner">
+    <mat-grid-list cols="4" rowHeight="400px">
+        <mat-grid-tile
+          [colspan]=4
+          [rowspan]=1>
+        <div class="conteiner">
+            <div class="izq" class="homePage">
+                <img src="../../../assets/img/logo.png" alt="Img" width="500" height="250" >
+            </div>
+            <div class="der" class="homePage">
+                <h2>Gestionador de Sueldos</h2>
+                <h3 >
+                        Es una empresa con gran transparencia en
+                        en lo financiero por lo cual esta pagina web
+                        da a conocer las finanzas.
+    
+                </h3 >
+            </div>
+        </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="conteiner" *ngIf="Rol =='Admi'">
+        <h1>Acciones de Administrador</h1>
+        <mat-grid-list cols="4" rowHeight="50px" >
+            <mat-grid-tile
+            [colspan]=4
+            [rowspan]=1
+            >
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="" class="a-new">Home</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/empleados" class="a-new">Empleados</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/departamentos" class="a-new">Departamentos</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/descuentos" class="a-new">Descuentos</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/impuestos" class="a-new">Impuestos</a>
+                </button>
+            </div>
+        </mat-grid-tile> 
+        <mat-grid-tile
+        [colspan]=4
+        [rowspan]=1
+        >
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/roles" class="a-new">Roles</a>
+            </button>
+        </div>
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/admin" class="a-new">Cuentas Web</a>
+            </button>
+        </div>
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/factura" class="a-new">Facturas</a>
+            </button>
+        </div>
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/actividad" class="a-new">Actividad Empleados</a>
+            </button>
+        </div>
+        </mat-grid-tile> 
+        </mat-grid-list>
+    </div>
+    
+    <div class="conteiner" >
+        <h1>Acciones de empleado</h1>
+        <mat-grid-list cols="4" rowHeight="50px" >
+            <mat-grid-tile
+            [colspan]=4
+            [rowspan]=1
+            >
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="" class="a-new">Home</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/actividadEmp" class="a-new">Actividad</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/descuento-emp" class="a-new">descuentos</a>
+                </button>
+            </div>
+            <div class="c" >
+                <button class="btn-new">
+                    <a  routerLink="/impuesto-emp" class="a-new">Impuestos</a>
+                </button>
+            </div>
+            
+        </mat-grid-tile> 
+        <mat-grid-tile
+        [colspan]=4
+        [rowspan]=1
+        >
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/beneficioEmp" class="a-new">Beneficios</a>
+            </button>
+        </div>
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/sueldoTotalEmp" class="a-new">Sueldo total a cobrar</a>
+            </button>
+        </div>
+        <div class="c" >
+            <button class="btn-new">
+                <a  routerLink="/FacturasEmp" class="a-new">Facturas</a>
+            </button>
+        </div>
+        
+        </mat-grid-tile> 
+        </mat-grid-list>
+    </div>
+</div>
+
+
+
+  
