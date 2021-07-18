@@ -3,8 +3,8 @@ Un proyecto  realizado por el estudiante de Ingeria de Sitemas Jose Mauricio Baz
 ## Para comenzar
 Su maquina debe contener instalado
 Los siguientes componetes
-__Git Puede hacerlo yendo al siguiente links:
-___Windows: https://git-scm.com/download/win
+_Git Puede hacerlo yendo al siguiente links:
+_Windows: https://git-scm.com/download/win
 ___Linux: https://git-scm.com/download/linux
 __Node: https://nodejs.org/es/download/
 __Y un editor de codigo.
