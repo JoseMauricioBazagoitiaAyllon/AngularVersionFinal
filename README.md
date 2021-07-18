@@ -12,7 +12,7 @@ __Y un editor de codigo.
 ```
 npm install -g @angular/cli
 ```
-##Clonar el repositorio
+###Clonar el repositorio
 ```
 git clone https://github.com/JoseMauricioBazagoitiaAyllon/AngularVersionFinal.git
 ```
