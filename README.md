@@ -1,8 +1,8 @@
 # Proyecto angular para un sistema de salarios
-_Un proyecto  realizado por el estudiante de Ingeria de Sitemas Jose Mauricio Bazagoitia Ayllon
+Un proyecto  realizado por el estudiante de Ingeria de Sitemas Jose Mauricio Bazagoitia Ayllon
 ## Para comenzar
-_Su maquina debe contener instalado
-_Los siguientes componetes
+Su maquina debe contener instalado
+Los siguientes componetes
 __Git Puede hacerlo yendo al siguiente links:
 ___Windows: https://git-scm.com/download/win
 ___Linux: https://git-scm.com/download/linux
