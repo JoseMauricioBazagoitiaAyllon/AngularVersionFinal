@@ -26,7 +26,7 @@ npm install
 ```
 ## Para realizar la vista del proyecto 
 ```
-npm server
+npm serve
 ```
 # Por otro lado nesecitaras inportar la base de datos
 * 1)Selecciona la base de datos de destino donde quieres importar tu base de datos.
