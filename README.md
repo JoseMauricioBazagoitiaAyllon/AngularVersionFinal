@@ -3,11 +3,11 @@ Un proyecto  realizado por el estudiante de Ingeria de Sistemas Jose Mauricio Ba
 ## Para comenzar
 Su maquina debe contener instalado
 Los siguientes componetes
-*Git Puede hacerlo yendo al siguiente links:
-*Windows: https://git-scm.com/download/win
-*Linux: https://git-scm.com/download/linux
-*Node: https://nodejs.org/es/download/
-*Y un editor de codigo.
+* Git Puede hacerlo yendo al siguiente links:
+* Windows: https://git-scm.com/download/win
+* Linux: https://git-scm.com/download/linux
+* Node: https://nodejs.org/es/download/
+* Y un editor de codigo.
 ## Instalar Angular CLI
 ```
 npm install -g @angular/cli
