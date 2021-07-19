@@ -1,5 +1,5 @@
 # Proyecto angular para un sistema de salarios
-Un proyecto  realizado por el estudiante de Ingeria de Sitemas Jose Mauricio Bazagoitia Ayllon
+Un proyecto  realizado por el estudiante de Ingeria de Sistemas Jose Mauricio Bazagoitia Ayllon
 ## Para comenzar
 Su maquina debe contener instalado
 Los siguientes componetes
