@@ -21,13 +21,29 @@ git clone https://github.com/JoseMauricioBazagoitiaAyllon/AngularVersionFinal.gi
 cd AngularVersionFinal
 ```
 ## e instala las dependecias
+
 ```
+cd backend
+npm install
+
+cd frontend
 npm install
 ```
 ## Para realizar la vista del proyecto 
+Para inisciar se debe haber importado la base de datos(instrucciones al final)
+
+
 ```
-npm serve
+cd backend
+npm run dev
 ```
+Al tener iniciado el backend continuamos con el frontend
+```
+cd frontend
+npm start
+```
+Para ver la aplicacion web debe ingresar a la siguiente URL:
+* http://localhost:4200
 # Por otro lado nesecitaras inportar la base de datos
 #En MySQL
 * 1)Selecciona la base de datos de destino donde quieres importar tu base de datos.
