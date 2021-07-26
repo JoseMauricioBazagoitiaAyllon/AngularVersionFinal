@@ -1,0 +1,63 @@
+<!--{{data.Emp | json}}-->
+<h2 mat-dialog-title>{{ data?.title }}</h2>
+<div class="conteiner" *ngIf="this.actionTODO  == 'new'">
+  <form>
+    <h4>mat-select</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Mes a Generar</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="food">
+        <mat-option *ngFor="let Mes of Meses" [value]="Mes.value">
+          {{Mes.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p> Selected food: {{selectedValue}} </p>
+    
+  </form>
+</div>
+
+<mat-dialog-content>
+  <div class="modal-form" *ngIf="this.actionTODO  == 'edit'">
+    <form [formGroup] = "ActiForm" >
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Cod_Emp"
+            matInput placeholder="Codigo de Empleado" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Horas_Extras"
+            matInput placeholder="Horas Extras" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_P"
+            matInput placeholder="Dias Puntual" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_A"
+            matInput placeholder="Dias con atraso" required>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+            <input 
+            formControlName="Dias_F"
+            matInput placeholder="Dias faltados" required>
+        </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<!--{{AdmiForm.status}}-->
+<mat-dialog-actions align  ="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="true"
+    color="primary"
+    (click)="onSave()"
+    ckdFocusInitial
+  >
+  <!--[disabled]="!userForm.baseForm.valid"-->
+    Save
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,113 @@
+<div class="row">
+  <p> </p>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <button
+    (click)="onOpenModal()"
+      mat-flat-button
+      color="primary"
+      class="btn-new"
+      >
+      Agregar actividades
+    </button>
+  </div>
+  <div class="col"></div>
+  <div class="col"></div>
+  <div class="col">
+    <mat-form-field>
+      <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Buscar">
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <mat-slide-toggle [(ngModel)] = "isChecked"  
+    (change)="actualizar()"
+    >Modo: {{textoA}}</mat-slide-toggle>
+  </div>
+  <div class="col"></div>
+  <div class="col"></div>
+  <div class="col" *ngIf="isChecked">
+    <button
+  (click)="excel()"
+    mat-flat-button
+    color="primary"
+    class="btn-new"
+    
+    >
+    Generar Excel
+  </button>
+  &nbsp;
+  <button
+  (click)="generatePDF()"
+    mat-flat-button
+    color="primary"
+    class="btn-new"
+    
+    >
+    Generar PDF
+  </button>
+  </div>
+</div>
+<!--"
+    -->
+<div id="Table1" #Table1>
+  <h1>Empleados</h1>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Cod_Emp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo del Empleado </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Cod_Emp}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nombre_Emp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Nombre del empleado </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Nombre_Emp}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Celular">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Celular </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Celular}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Direccion" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Direccion}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Cod_Dep" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo de Departamento </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Cod_Dep}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Cod_Rol" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo de Rol </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Cod_Rol}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Cod_Sueldo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo de Sueldo </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Cod_Sueldo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Acciones </th>
+      <td mat-cell *matCellDef="let element" >
+        <div class="table-button-row">
+          <button mat-flat-button color = "accent" (click)="onOpenModal(element)" class="btn-new" class="aling">Editar</button>
+          <button mat-flat-button color = "warn" (click)="onDelete(element.Cod_Emp)" class="aling">Eliminar</button>
+        </div>
+      </td>
+    </ng-container>
+    
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

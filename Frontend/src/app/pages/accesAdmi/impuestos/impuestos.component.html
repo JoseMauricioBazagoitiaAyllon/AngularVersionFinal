@@ -1,0 +1,61 @@
+
+  <div class="row">
+    <p> </p>
+  </div>
+  <div class="row align-items-center">
+    <div class="col">
+      <button
+      (click)="onOpenModal()"
+        mat-flat-button
+        color="primary"
+        class="btn-new"
+        >
+        Agregar Nuevo Impuesto
+      </button>
+    </div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+      <mat-form-field>
+        <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Buscar">
+      </mat-form-field>
+    </div>
+  </div>
+  <!--"
+      -->
+      <h1>Impuestos</h1>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Cod_Imp" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Codigo de Impuesto </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Cod_Imp}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Nombre_Imp" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Nombre de Impuesto </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Nombre_Imp}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Porcentaje_Imp" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="aling"> Porcentaje de Impuesto </th>
+      <td mat-cell *matCellDef="let element" class="aling"> {{element.Porcentaje_Imp}} </td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="actions" class="aling">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="table-button-row">
+          <button mat-flat-button color = "accent" (click)="onOpenModal(element)" class="btn-new" class="aling">Editar</button>
+          <button mat-flat-button color = "warn" (click)="onDelete(element.Cod_Imp)"class="aling">Eliminar</button>
+        </div>
+      </td>
+    </ng-container>
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
