@@ -29,8 +29,9 @@ npm install
 npm serve
 ```
 # Por otro lado nesecitaras inportar la base de datos
+#En MySQL
 * 1)Selecciona la base de datos de destino donde quieres importar tu base de datos.
 * 2)Haz clic sobre "Importar" en la botonera superior.
 * 3)Busca el archivo en tu PC .SQL que quieres importar.
 * 4)Haz clic en el botón "Continuar" del pie de página para realizar la importación.
-# El archivo .SQL Lo puede encontrarlo en server\BD
+# El archivo .SQL Lo puede encontrarlo en backend\BD
