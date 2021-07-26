@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `salarios` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `salarios` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `salarios`;
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
@@ -41,6 +41,49 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `Rol`,
  1 AS `Departamento`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `actividadcreadaa`
+--
+
+DROP TABLE IF EXISTS `actividadcreadaa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `actividadcreadaa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idMes` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `actividadcreadaa`
+--
+
+LOCK TABLES `actividadcreadaa` WRITE;
+/*!40000 ALTER TABLE `actividadcreadaa` DISABLE KEYS */;
+INSERT INTO `actividadcreadaa` VALUES (5,10),(6,NULL),(7,NULL),(8,NULL),(9,2);
+/*!40000 ALTER TABLE `actividadcreadaa` ENABLE KEYS */;
+UNLOCK TABLES;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `crearActividad` AFTER INSERT ON `actividadcreadaa` FOR EACH ROW begin
+call  Agregar_Actividades(New.idMes);
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 
 --
 -- Table structure for table `administradores`
@@ -187,6 +230,7 @@ CREATE TABLE `empleados` (
   `Cod_Dep` int DEFAULT NULL,
   `Cod_Rol` int DEFAULT NULL,
   `Cod_Sueldo` int DEFAULT NULL,
+  `Anhos_Antiguedad` int DEFAULT NULL,
   PRIMARY KEY (`Cod_Emp`),
   KEY `fk_empl_rol_idx` (`Cod_Rol`),
   KEY `fk_empl_sueldo_idx` (`Cod_Sueldo`),
@@ -194,7 +238,7 @@ CREATE TABLE `empleados` (
   CONSTRAINT `fk_empl_dep` FOREIGN KEY (`Cod_Dep`) REFERENCES `departamento` (`Cod_Dep`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_empl_rol` FOREIGN KEY (`Cod_Rol`) REFERENCES `rol` (`Cod_Rol`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_empl_sueldo` FOREIGN KEY (`Cod_Sueldo`) REFERENCES `sueldo` (`Cod_Sueldo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +247,7 @@ CREATE TABLE `empleados` (
 
 LOCK TABLES `empleados` WRITE;
 /*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
-INSERT INTO `empleados` VALUES (1,'julian1',78965421,'Loa #500',1,1,5),(2,'juan',78985421,'Loa #501',2,2,4),(3,'julia',79965421,'Loa #505',3,3,3),(4,'jose',79965721,'Loa #507',4,4,2),(5,'joel',79965721,'Loa #507',5,5,1),(9,'Ricardo',78965421,'Loa #550',2,2,4),(17,'enrique',78945613,'Loa #32',1,2,3),(18,'Leonardo',78946513,'Loa #600',1,2,3),(19,'leo',789456123,'Loa#333',1,2,3);
+INSERT INTO `empleados` VALUES (1,'julian1',78965421,'Loa #500',1,1,5,8),(2,'juan',78985421,'Loa #501',2,2,4,5),(3,'julia',79965421,'Loa #505',3,3,3,10),(4,'jose',79965721,'Loa #507',4,4,2,5),(5,'joel',79965721,'Loa #507',5,5,1,10),(9,'Ricardo',78965421,'Loa #550',2,2,4,5),(17,'enrique',78945613,'Loa #32',1,2,3,5),(18,'Leonardo',78946513,'Loa #600',1,2,3,5),(19,'leo',789456123,'Loa#333',1,2,3,5);
 /*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,7 +311,7 @@ CREATE TABLE `facturas_presentadas` (
   KEY `fk_Empleados_idx` (`Cod_Empleados`),
   CONSTRAINT `fk_Empleados` FOREIGN KEY (`Cod_Empleados`) REFERENCES `empleados` (`Cod_Emp`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_facturas_Presentadas` FOREIGN KEY (`Cod_Factura`) REFERENCES `factura` (`Cod_Factura`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,7 +320,7 @@ CREATE TABLE `facturas_presentadas` (
 
 LOCK TABLES `facturas_presentadas` WRITE;
 /*!40000 ALTER TABLE `facturas_presentadas` DISABLE KEYS */;
-INSERT INTO `facturas_presentadas` VALUES (1,1,'Mayo','Junio',1),(2,2,'Mayo','Junio',1),(3,3,'Mayo','Junio',1),(4,4,'Mayo','Junio',1),(5,5,'Mayo','Junio',1),(6,6,'Mayo','Junio',1),(7,7,'Mayo','Junio',1),(8,8,'Mayo','Junio',1),(9,9,'Mayo','Junio',1),(10,2,'Mayo','Junio',2),(11,3,'Mayo','Junio',2),(12,4,'Mayo','Junio',2),(13,5,'Mayo','Junio',2),(14,6,'Mayo','Junio',2),(15,7,'Mayo','Junio',2),(16,8,'Mayo','Junio',2),(17,9,'Mayo','Junio',2),(19,1,'Mayo','Junio',3),(21,1,'Mayo','Junio',3),(22,2,'Mayo','Junio',3),(23,1,'julio','Agosto',1),(24,2,'Julio','Agosto',1),(25,5,'Junio','Julio',1),(26,5,'Mayo','Junio',3),(28,5,'Junio','Julio',3),(29,5,'Mayo','Junio',3);
+INSERT INTO `facturas_presentadas` VALUES (1,1,'Mayo','Junio',1),(2,2,'Mayo','Junio',1),(3,3,'Mayo','Junio',1),(4,4,'Mayo','Junio',1),(5,5,'Mayo','Junio',1),(6,6,'Mayo','Junio',1),(7,7,'Mayo','Junio',1),(8,8,'Mayo','Junio',1),(9,9,'Mayo','Junio',1),(10,2,'Mayo','Junio',2),(11,3,'Mayo','Junio',2),(12,4,'Mayo','Junio',2),(13,5,'Mayo','Junio',2),(14,6,'Mayo','Junio',2),(15,7,'Mayo','Junio',2),(16,8,'Mayo','Junio',2),(17,9,'Mayo','Junio',2),(19,1,'Mayo','Junio',3),(21,1,'Mayo','Junio',3),(22,2,'Mayo','Junio',3),(23,1,'julio','Agosto',1),(24,2,'Julio','Agosto',1),(25,5,'Junio','Julio',1),(26,5,'Mayo','Junio',3),(28,5,'Junio','Julio',3),(29,5,'Mayo','Junio',3),(30,5,'junio','Julio',3),(31,5,'Agosto','Septiempbe',1),(32,5,'Agosto','Septiembre',1),(33,5,'Septiembre','Octubre',1);
 /*!40000 ALTER TABLE `facturas_presentadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,6 +367,31 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `meses`
+--
+
+DROP TABLE IF EXISTS `meses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `meses` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `Nombre_Mes` varchar(45) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `Dias` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `meses`
+--
+
+LOCK TABLES `meses` WRITE;
+/*!40000 ALTER TABLE `meses` DISABLE KEYS */;
+INSERT INTO `meses` VALUES (1,'Enero',31),(2,'Febrero',28),(3,'Marzo',31),(4,'Abril',30),(5,'Mayo',31),(6,'Junio',30),(7,'Julio',31),(8,'Agosto',31),(9,'Septiembre',30),(10,'Octubre',31),(11,'Noviembre',30),(12,'Diciembre',31);
+/*!40000 ALTER TABLE `meses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `registros_emp`
 --
 
@@ -338,11 +407,10 @@ CREATE TABLE `registros_emp` (
   `Dias_F` int DEFAULT NULL,
   `Dias_Totales` int DEFAULT NULL,
   `Mes_vigente` varchar(45) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
-  `Anhos_Antiguedad` int DEFAULT NULL,
   PRIMARY KEY (`cod_Registros_Emp`),
   KEY `fk_Reg_Emp_idx` (`Cod_Emp`),
   CONSTRAINT `fk_Reg_Emp` FOREIGN KEY (`Cod_Emp`) REFERENCES `empleados` (`Cod_Emp`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +419,7 @@ CREATE TABLE `registros_emp` (
 
 LOCK TABLES `registros_emp` WRITE;
 /*!40000 ALTER TABLE `registros_emp` DISABLE KEYS */;
-INSERT INTO `registros_emp` VALUES (2,2,11,26,4,0,30,'junio',9),(3,3,10,25,4,1,30,'junio',10),(4,4,15,28,1,1,30,'junio',5),(5,5,10,24,4,2,30,'junio',10),(6,1,6,25,1,4,30,'julio',8),(7,2,15,26,4,0,30,'julio',9),(8,3,15,25,4,1,30,'julio',10),(9,4,10,28,1,1,30,'julio',5),(10,5,18,24,4,2,30,'julio',10),(17,1,15,28,2,1,31,'Agosto',8);
+INSERT INTO `registros_emp` VALUES (2,2,30,29,0,1,30,'juni'),(3,3,10,25,4,1,100,'junio'),(4,4,15,28,1,1,30,'junio'),(5,5,10,24,4,2,30,'junio'),(7,2,15,26,4,0,30,'julio'),(8,3,15,25,4,1,30,'julio'),(9,4,10,28,1,1,30,'julio'),(10,5,18,24,4,2,30,'julio'),(17,1,15,28,2,1,31,'Agosto'),(20,1,15,27,3,1,31,'Septiembre'),(22,1,25,25,5,1,31,'Julio'),(23,1,15,28,2,0,30,'Enero'),(24,1,0,28,0,0,28,'Febrero'),(25,2,0,28,0,0,28,'Febrero'),(26,3,0,28,0,0,28,'Febrero'),(27,4,0,28,0,0,28,'Febrero'),(28,5,0,28,0,0,28,'Febrero'),(29,9,0,28,0,0,28,'Febrero'),(30,17,0,28,0,0,28,'Febrero'),(31,18,0,28,0,0,28,'Febrero'),(32,19,0,28,0,0,28,'Febrero'),(33,1,0,31,0,0,31,'Octubre'),(34,2,0,31,0,0,31,'Octubre'),(35,3,0,31,0,0,31,'Octubre'),(36,4,0,31,0,0,31,'Octubre'),(37,5,0,31,0,0,31,'Octubre'),(38,9,0,31,0,0,31,'Octubre'),(39,17,0,31,0,0,31,'Octubre'),(40,18,0,31,0,0,31,'Octubre'),(41,19,0,31,0,0,31,'Octubre'),(69,1,0,28,0,0,28,'Febrero'),(70,2,0,28,0,0,28,'Febrero'),(71,3,0,28,0,0,28,'Febrero'),(72,4,0,28,0,0,28,'Febrero'),(73,5,0,28,0,0,28,'Febrero'),(74,9,0,28,0,0,28,'Febrero'),(75,17,0,28,0,0,28,'Febrero'),(76,18,0,28,0,0,28,'Febrero'),(77,19,0,28,0,0,28,'Febrero');
 /*!40000 ALTER TABLE `registros_emp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,6 +471,46 @@ LOCK TABLES `sueldo` WRITE;
 INSERT INTO `sueldo` VALUES (1,147,25),(2,160,25),(3,180,25),(4,185,25),(5,190,25),(7,200,30),(8,150,25),(11,156,100),(12,154,20),(13,105,10);
 /*!40000 ALTER TABLE `sueldo` ENABLE KEYS */;
 UNLOCK TABLES;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `actualizar_Enlaces_Sueldo` AFTER INSERT ON `sueldo` FOR EACH ROW BEGIN
+	insert	into sueldo_paga_descuento (Cod_Sueldo,Cod_Descuentos) value (new.Cod_Sueldo, 1),(new.Cod_Sueldo, 2);
+    insert	into sueldo_paga_impuesto (Cod_Sueldo,Cod_Imp) value (new.Cod_Sueldo, 1),(new.Cod_Sueldo, 2);
+  END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `eliminar_Enlaces_Sueldo` AFTER DELETE ON `sueldo` FOR EACH ROW BEGIN
+	DELETE FROM sueldo_paga_descuento WHERE Cod_Sueldo = old.Cod_Sueldo;
+    DELETE FROM sueldo_paga_impuesto WHERE Cod_Sueldo = old.Cod_Sueldo;
+  END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 
 --
 -- Table structure for table `sueldo_paga_descuento`
@@ -577,6 +685,178 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Dumping events for database 'salarios'
+--
+
+--
+-- Dumping routines for database 'salarios'
+--
+/*!50003 DROP FUNCTION IF EXISTS `AntiguedadB` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `AntiguedadB`(Años int) RETURNS float
+    DETERMINISTIC
+BEGIN
+declare PB float;
+Select if(Años >= 2 && Años <= 4, 0.05, if(Años >= 5 && Años <= 7, 0.11,if(Años >= 8 && Años <= 10,0.18,if(Años >= 11 && Años <= 14,0.26,
+0.00)))) into PB;
+RETURN PB;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+/*!50003 DROP FUNCTION IF EXISTS `DescuentosT` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `DescuentosT`() RETURNS float
+    DETERMINISTIC
+BEGIN
+declare  total float ;
+select sum(Porcentaje_Des) as descuentos_Totales into total from descuento;
+RETURN total;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+/*!50003 DROP FUNCTION IF EXISTS `impuestosT` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `impuestosT`() RETURNS float
+    DETERMINISTIC
+BEGIN
+declare  total float ;
+select sum(Porcentaje_Imp) as Impuestos_Totales into total from Impuesto;
+RETURN total;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+/*!50003 DROP FUNCTION IF EXISTS `impuestos_Pagados_factura` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `impuestos_Pagados_factura`(cod int, mes varchar(20)) RETURNS float
+    DETERMINISTIC
+BEGIN
+declare IPF float;
+select sum(Cantidad) from facturas where Mes_Descargo = mes and nro_Empleado = cod into IPF;
+RETURN IPF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+/*!50003 DROP FUNCTION IF EXISTS `sueldoTotal` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `sueldoTotal`() RETURNS float
+    DETERMINISTIC
+BEGIN
+declare total float;
+select s.Cant_Sueldo_Dia*e.Dias_P +(Cant_Sueldo_Dia * 0.5 * e.Dias_A) into total
+from empleados as e
+inner join sueldo as s on e.Cod_Sueldo = s.Cod_Sueldo
+;
+RETURN total;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+/*!50003 DROP PROCEDURE IF EXISTS `Agregar_Actividades` */;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Agregar_Actividades`(mes int)
+BEGIN
+declare dp varchar(45);
+declare dt int;
+declare n1 varchar(45);
+declare mes1 int;
+DECLARE n INT DEFAULT 0;
+DECLARE i INT DEFAULT 0;
+SELECT MAX(Cod_Emp) AS Cod_Emp FROM empleados into n;
+Set mes1 = mes; 
+SET i=0;
+WHILE i<=n DO 
+	select Nombre_Emp from empleados where Cod_Emp = i  into n1;
+    IF exists(select Nombre_Emp from empleados where Cod_Emp = i)
+    then
+		select Nombre_Mes from meses where id = mes1 into dp;
+        select Dias from meses where id = mes1 into dt;
+		insert into registros_emp(Cod_Emp,Horas_Extras,Dias_P,Dias_A,Dias_F,Dias_Totales,Mes_vigente)
+        values(i,0,dt,0,0,dt,dp);
+    end if;
+	SET i = i + 1;
+END WHILE;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `salarios` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
+
+--
 -- Final view structure for view `actividad_de_empleado`
 --
 
@@ -586,10 +866,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `actividad_de_empleado` AS select `re`.`cod_Registros_Emp` AS `cod_Registros_Emp`,`e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `Nombre`,`e`.`Celular` AS `Celular`,`e`.`Direccion` AS `Direccion`,`re`.`Horas_Extras` AS `Horas_Extras`,`re`.`Dias_P` AS `Dias_Puntual`,`re`.`Dias_A` AS `Dias_Atrasado`,`re`.`Dias_F` AS `Dias_que_Falto`,`re`.`Dias_Totales` AS `Dias_Totales`,`re`.`Anhos_Antiguedad` AS `Anhos_De_Antiguedad`,`re`.`Mes_vigente` AS `Mes_de_informacion`,`r`.`Nombre_Rol` AS `Rol`,`d`.`Nombre_Dep` AS `Departamento` from (((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) */;
+/*!50001 VIEW `actividad_de_empleado` AS select `re`.`cod_Registros_Emp` AS `cod_Registros_Emp`,`e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `Nombre`,`e`.`Celular` AS `Celular`,`e`.`Direccion` AS `Direccion`,`re`.`Horas_Extras` AS `Horas_Extras`,`re`.`Dias_P` AS `Dias_Puntual`,`re`.`Dias_A` AS `Dias_Atrasado`,`re`.`Dias_F` AS `Dias_que_Falto`,`re`.`Dias_Totales` AS `Dias_Totales`,`e`.`Anhos_Antiguedad` AS `Anhos_De_Antiguedad`,`re`.`Mes_vigente` AS `Mes_de_informacion`,`r`.`Nombre_Rol` AS `Rol`,`d`.`Nombre_Dep` AS `Departamento` from (((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -604,7 +884,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `adminview` AS select `admi`.`Cod_Admi` AS `Codigo`,`admi`.`User_Name` AS `Usuario`,`admi`.`User_password` AS `contraseña`,`emp`.`Nombre_Emp` AS `Nombre_Emp` from (`administradores` `admi` join `empleados` `emp` on((`admi`.`Cod_Emp` = `emp`.`Cod_Emp`))) */;
@@ -622,10 +902,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `beneficios_informe` AS select `e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `nombre`,`re`.`Anhos_Antiguedad` AS `Anhos_Antiguedad`,`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) AS `porcentaje_Antiguedad`,round((`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`))),2) AS `Beneficio_Antiguedad`,`re`.`Horas_Extras` AS `Horas_Extras`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
+/*!50001 VIEW `beneficios_informe` AS select `e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `nombre`,`e`.`Anhos_Antiguedad` AS `Anhos_Antiguedad`,`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) AS `porcentaje_Antiguedad`,round((`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`))),2) AS `Beneficio_Antiguedad`,`re`.`Horas_Extras` AS `Horas_Extras`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -640,10 +920,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `descuentos_que_pagan` AS select `e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,`des`.`Nombre_Des` AS `Descuento`,`des`.`Porcentaje_Des` AS `Porcentaje`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Descuentos_a_Pagar_Total`,`re`.`Mes_vigente` AS `mes` from ((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_descuento` `spd` on((`s`.`Cod_Sueldo` = `spd`.`Cod_Sueldo`))) join `descuento` `des` on((`spd`.`Cod_Descuentos` = `des`.`Cod_Descuento`))) order by `e`.`Cod_Emp` */;
+/*!50001 VIEW `descuentos_que_pagan` AS select `e`.`Cod_Emp` AS `Nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,`des`.`Nombre_Des` AS `Descuento`,`des`.`Porcentaje_Des` AS `Porcentaje`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Descuentos_a_Pagar_Total`,`re`.`Mes_vigente` AS `mes` from ((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_descuento` `spd` on((`s`.`Cod_Sueldo` = `spd`.`Cod_Sueldo`))) join `descuento` `des` on((`spd`.`Cod_Descuentos` = `des`.`Cod_Descuento`))) order by `e`.`Cod_Emp` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -658,7 +938,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `facturas` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `nombre`,`f`.`Cod_Factura` AS `Codigo_Factura`,`f`.`Empresa_Factura` AS `empresa_factura`,`f`.`Cantidad_Factura` AS `Cantidad`,`fp`.`Mes_Descargo` AS `Mes_Descargo` from ((`empleados` `e` join `facturas_presentadas` `fp` on((`e`.`Cod_Emp` = `fp`.`Cod_Empleados`))) join `factura` `f` on((`f`.`Cod_Factura` = `fp`.`Cod_Factura`))) */;
@@ -676,10 +956,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `impuestos_que_pagan` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,`i`.`Nombre_Imp` AS `Nombre_impuesto`,`i`.`Porcentaje_Imp` AS `Porcentaje_Impuesto`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Impuestos_a_Pagar`,`re`.`Mes_vigente` AS `mes` from ((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_impuesto` `spi` on((`s`.`Cod_Sueldo` = `spi`.`Cod_Sueldo`))) join `impuesto` `i` on((`spi`.`Cod_Imp` = `i`.`Cod_Imp`))) order by `e`.`Cod_Emp` */;
+/*!50001 VIEW `impuestos_que_pagan` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,`i`.`Nombre_Imp` AS `Nombre_impuesto`,`i`.`Porcentaje_Imp` AS `Porcentaje_Impuesto`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Impuestos_a_Pagar`,`re`.`Mes_vigente` AS `mes` from ((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_impuesto` `spi` on((`s`.`Cod_Sueldo` = `spi`.`Cod_Sueldo`))) join `impuesto` `i` on((`spi`.`Cod_Imp` = `i`.`Cod_Imp`))) order by `e`.`Cod_Emp` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -694,10 +974,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `total_sueldo_dias` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) AS `Sueldo_Total`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) AS `Beneficio_Antiguedad`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
+/*!50001 VIEW `total_sueldo_dias` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) AS `Sueldo_Total`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) AS `Beneficio_Antiguedad`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -712,7 +992,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `total_sueldo_dias_informe` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `nombre`,`re`.`Dias_P` AS `Dias_Puntual`,(`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) AS `Pago_Dias_Puntual`,`re`.`Dias_A` AS `Dias_Atrasado`,((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`) AS `Pago_Dias_Atraso`,`re`.`Dias_F` AS `Dias_No_Cobrados`,0 AS `Pago_Dias_Faltados`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
@@ -730,10 +1010,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `total_sueldo_informe` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) AS `Sueldo_Total`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,round((`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`))),2) AS `Beneficio_Antiguedad`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Descuentos`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`()),2) AS `Impuestos`,ifnull(`IMPUESTOS_PAGADOS_FACTURA`(`e`.`Cod_Emp`,`re`.`Mes_vigente`),0) AS `Impuestos_pagados_con_facturas`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) - ((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()) + (((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`()))),2) AS `Total_a_pagar`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) - (((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()) + (((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`re`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`())) - ifnull(`IMPUESTOS_PAGADOS_FACTURA`(`e`.`Cod_Emp`,`re`.`Mes_vigente`),0))),2) AS `Total_a_pagar_Con_facturas`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
+/*!50001 VIEW `total_sueldo_informe` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `Empleado`,((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) AS `Sueldo_Total`,(`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`) AS `Pago_Horas_Extras`,round((`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`))),2) AS `Beneficio_Antiguedad`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()),2) AS `Descuentos`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`()),2) AS `Impuestos`,ifnull(`IMPUESTOS_PAGADOS_FACTURA`(`e`.`Cod_Emp`,`re`.`Mes_vigente`),0) AS `Impuestos_pagados_con_facturas`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) - ((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()) + (((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`()))),2) AS `Total_a_pagar`,round((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) - (((((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `DESCUENTOST`()) + (((((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)) + (`ANTIGUEDADB`(`e`.`Anhos_Antiguedad`) * (((`s`.`Cant_Sueldo_Dia` * `re`.`Dias_P`) + ((`s`.`Cant_Sueldo_Dia` * 0.5) * `re`.`Dias_A`)) + (`re`.`Horas_Extras` * `s`.`Cant_Sueldo_Horas_Extras`)))) * `IMPUESTOST`())) - ifnull(`IMPUESTOS_PAGADOS_FACTURA`(`e`.`Cod_Emp`,`re`.`Mes_vigente`),0))),2) AS `Total_a_pagar_Con_facturas`,`re`.`Mes_vigente` AS `mes` from ((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -748,7 +1028,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewfacturas` AS select `e`.`Cod_Emp` AS `nro_Empleado`,`e`.`Nombre_Emp` AS `nombre`,`f`.`Cod_Factura` AS `Codigo_Factura`,`f`.`Empresa_Factura` AS `empresa_factura`,`f`.`Cantidad_Factura` AS `Cantidad`,`fp`.`Mes_Descargo` AS `Mes_Descargo` from ((`empleados` `e` join `facturas_presentadas` `fp` on((`e`.`Cod_Emp` = `fp`.`Cod_Empleados`))) join `factura` `f` on((`f`.`Cod_Factura` = `fp`.`Cod_Factura`))) */;
@@ -766,7 +1046,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `viewinv` AS select round(sum(`total_sueldo_informe`.`Total_a_pagar_Con_facturas`),2) AS `Pagos_este_mes`,`total_sueldo_informe`.`mes` AS `Mes` from `total_sueldo_informe` */;
@@ -784,10 +1064,10 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vista_bd_completa` AS select `e`.`Cod_Emp` AS `Cod_Emp`,`e`.`Nombre_Emp` AS `Nombre_Emp`,`e`.`Celular` AS `Celular`,`e`.`Direccion` AS `Direccion`,`re`.`Horas_Extras` AS `Horas_Extras`,`re`.`Dias_Totales` AS `Dias_Totales`,`re`.`Anhos_Antiguedad` AS `Años_Antiguedad`,`re`.`Mes_vigente` AS `Mes_vigente`,`r`.`Nombre_Rol` AS `Nombre_Rol`,`d`.`Nombre_Dep` AS `Nombre_Dep`,`s`.`Cant_Sueldo_Dia` AS `Cant_Sueldo_Dia`,`s`.`Cant_Sueldo_Horas_Extras` AS `Cant_Sueldo_Horas_Extras`,`des`.`Nombre_Des` AS `Nombre_Des`,`des`.`Porcentaje_Des` AS `Porcentaje_Des`,`i`.`Nombre_Imp` AS `Nombre_imp`,`i`.`Porcentaje_Imp` AS `Porcentaje_Imp` from ((((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_descuento` `spd` on((`s`.`Cod_Sueldo` = `spd`.`Cod_Sueldo`))) join `descuento` `des` on((`spd`.`Cod_Descuentos` = `des`.`Cod_Descuento`))) join `sueldo_paga_impuesto` `spi` on((`s`.`Cod_Sueldo` = `spi`.`Cod_Sueldo`))) join `impuesto` `i` on((`spi`.`Cod_Imp` = `i`.`Cod_Imp`))) */;
+/*!50001 VIEW `vista_bd_completa` AS select `e`.`Cod_Emp` AS `Cod_Emp`,`e`.`Nombre_Emp` AS `Nombre_Emp`,`e`.`Celular` AS `Celular`,`e`.`Direccion` AS `Direccion`,`re`.`Horas_Extras` AS `Horas_Extras`,`re`.`Dias_Totales` AS `Dias_Totales`,`e`.`Anhos_Antiguedad` AS `Años_Antiguedad`,`re`.`Mes_vigente` AS `Mes_vigente`,`r`.`Nombre_Rol` AS `Nombre_Rol`,`d`.`Nombre_Dep` AS `Nombre_Dep`,`s`.`Cant_Sueldo_Dia` AS `Cant_Sueldo_Dia`,`s`.`Cant_Sueldo_Horas_Extras` AS `Cant_Sueldo_Horas_Extras`,`des`.`Nombre_Des` AS `Nombre_Des`,`des`.`Porcentaje_Des` AS `Porcentaje_Des`,`i`.`Nombre_Imp` AS `Nombre_imp`,`i`.`Porcentaje_Imp` AS `Porcentaje_Imp` from ((((((((`empleados` `e` join `registros_emp` `re` on((`e`.`Cod_Emp` = `re`.`Cod_Emp`))) join `rol` `r` on((`e`.`Cod_Rol` = `r`.`Cod_Rol`))) join `departamento` `d` on((`e`.`Cod_Dep` = `d`.`Cod_Dep`))) join `sueldo` `s` on((`e`.`Cod_Sueldo` = `s`.`Cod_Sueldo`))) join `sueldo_paga_descuento` `spd` on((`s`.`Cod_Sueldo` = `spd`.`Cod_Sueldo`))) join `descuento` `des` on((`spd`.`Cod_Descuentos` = `des`.`Cod_Descuento`))) join `sueldo_paga_impuesto` `spi` on((`s`.`Cod_Sueldo` = `spi`.`Cod_Sueldo`))) join `impuesto` `i` on((`spi`.`Cod_Imp` = `i`.`Cod_Imp`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -801,4 +1081,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-18  0:04:57
+-- Dump completed on 2021-07-26  1:12:25
