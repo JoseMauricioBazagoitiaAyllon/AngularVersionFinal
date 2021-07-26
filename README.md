@@ -1,13 +1,13 @@
 # Proyecto angular para un sistema de salarios
-Un proyecto  realizado por el estudiante de Ingeria de Sitemas Jose Mauricio Bazagoitia Ayllon
+Un proyecto  realizado por el estudiante de Ingeria de Sistemas Jose Mauricio Bazagoitia Ayllon
 ## Para comenzar
 Su maquina debe contener instalado
 Los siguientes componetes
-*Git Puede hacerlo yendo al siguiente links:
-*Windows: https://git-scm.com/download/win
-*Linux: https://git-scm.com/download/linux
-*Node: https://nodejs.org/es/download/
-*Y un editor de codigo.
+* Git Puede hacerlo yendo al siguiente links:
+* Windows: https://git-scm.com/download/win
+* Linux: https://git-scm.com/download/linux
+* Node: https://nodejs.org/es/download/
+* Y un editor de codigo.
 ## Instalar Angular CLI
 ```
 npm install -g @angular/cli
@@ -26,7 +26,7 @@ npm install
 ```
 ## Para realizar la vista del proyecto 
 ```
-npm server
+npm serve
 ```
 # Por otro lado nesecitaras inportar la base de datos
 * 1)Selecciona la base de datos de destino donde quieres importar tu base de datos.
